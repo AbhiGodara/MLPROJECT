@@ -3,11 +3,14 @@ import sys
 from src.exception import CustomException
 from src.logger import logging
 import pandas as pd
+import numpy as np
  
 from sklearn.model_selection import train_test_split
 from dataclasses import dataclass
 
 from src.components.data_transformation import DataTransformation,DataTransformationConfig
+
+from src.components.model_trainer import ModelTrainerConfig,ModelTrainer
 
 @dataclass
 class DataIngestionConfig:
@@ -46,4 +49,21 @@ if __name__=='__main__':
     train_data,test_data=obj.initiate_data_ingestion()
 
     data_transformation=DataTransformation()
-    data_transformation.initiate_data_transformation(train_data,test_data)
+    train_array,test_array,_=data_transformation.initiate_data_transformation(train_data,test_data)
+
+    # x_train = train_array[:, :-1]
+    # y_train = train_array[:, -1]
+    # x_test = test_array[:, :-1]
+    # y_test = test_array[:, -1]
+    # print("x_train shape:", x_train.shape)
+    # print("x_test shape:", x_test.shape)
+    # print("y_train shape:", y_train.shape)
+    # print("y_test shape:", y_test.shape)
+    # print("First few y_train:", y_train[:5])
+    # print("First few y_test:", y_test[:5])
+    # print("Unique y_train values:", np.unique(y_train))
+    # print("Unique y_test values:", np.unique(y_test))
+
+    modeltrainer=ModelTrainer()
+    R2_score=modeltrainer.initiate_model_trainer(train_array,test_array)
+    print(f"R2 Score of the best model: {R2_score}")
