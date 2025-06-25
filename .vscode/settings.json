@@ -1,0 +1,8 @@
+{
+    "editor.quickSuggestions": {
+        "other": "off"
+    },
+    "editor.suggest.selectionMode": "never",
+    "editor.suggestOnTriggerCharacters": false,
+    "editor.quickSuggestionsDelay": 1000000000
+}
